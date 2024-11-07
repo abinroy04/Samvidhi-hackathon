@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold">Dashboard</h1>
+            <div class="flex space-x-4">
+                <a href="{{ url_for('leaderboard') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    View Leaderboard
+                </a>
+                <a href="{{ url_for('logout') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h2 class="text-2xl font-bold mb-4">Screen Time</h2>
+            <table class="table-auto w-full">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Week</th>
+                        <th class="px-4 py-2">Minutes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for week, minutes in screen_time_data %}
+                    <tr>
+                        <td class="border px-4 py-2">{{ week.strftime('%Y-%m-%d') }}</td>
+                        <td class="border px-4 py-2">{{ minutes }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h2 class="text-2xl font-bold mb-4">Token Balance</h2>
+            <p class="text-4xl font-bold">{{ token_balance }}</p>
+        </div>
+    </div>
+</body>
+</html>
